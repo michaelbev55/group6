@@ -1,0 +1,27 @@
+---
+title: "MP2 Report"
+author: "Michael Bevilacqua"
+date: "2024-02-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r functions, message=FALSE, echo=FALSE, warning=FALSE}
+dat1 <- tibble(
+  Measurement = c("Mass", "Larm", "Li", "Lo"),
+  Phil = c(0.418, 0.35, 0.08, 0.32),
+  Colin = c(0.252, 0.31, 0.065, 0.28),
+  Michael = c(0.344, 0.305, 0.08, 0.32)
+)
+print(dat1)
+
+
+
+```
+
+
+
