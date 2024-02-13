@@ -18,10 +18,27 @@ dat1 <- tibble(
   Michael = c(0.344, 0.305, 0.08, 0.32)
 )
 print(dat1)
-
-
-
 ```
 
+```{r functions, message=FALSE, echo=FALSE, warning=FALSE}
+dat1 <- tibble(
+ Person= c("Phil", "Colin", "Michael"),
+  Mass = c(0.418, 0.252, 0.344),
+  Larm = c(0.350, 0.31, 0.305),
+  Li = c(0.080, 0.065, 0.080),
+  Lo = c(0.320, 0.280, 0.320)
+)
+print(dat1)
+```
 
+```{r}
+o <- dat1$Larm
+r <- dat1$Li
+l <- dat1$Lo
+law_cos <- function(o,r,l) {
+  cos_theta <- (o^2 + r^2 - l^2) / (2 * o * r)
+  theta <- acos(cos_theta)
+  return(theta)
+}
+```
 
