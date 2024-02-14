@@ -38,12 +38,18 @@ law_cos <- function(o,r,l) {
   theta <- acos(cos_theta)
   return(theta)
 }
+dat2 <- dat1 %>% 
+  mutate(theta = law_cos(o,r,l)) %>% 
+  print()
 
 
 law_cos2 <- function(l, r, theta) {
   Lmuscle <- sqrt(-1 * (cos(theta) * 2 * l * r - l^2 - r^2))
   return(Lmuscle)
 }
+dat3 <- dat2 %>% 
+  mutate(Lmuscle = law_cos2(l,r,theta)) %>% 
+  print()
 
 ```
 
