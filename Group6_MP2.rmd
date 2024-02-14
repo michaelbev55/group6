@@ -51,5 +51,12 @@ dat3 <- dat2 %>%
   mutate(Lmuscle = law_cos2(l,r,theta)) %>% 
   print()
 
+rho <- 0.00105
+k <- 80
+Lmuscler <- Lmuscle * 0.8
+model <- funtion(Mass, Lmuscler, Lmuscle, theta, r, rho, k)
+
+
+
 ```
 
