@@ -1,6 +1,6 @@
 ---
 title: "MP2 Report"
-author: "Michael Bevilacqua"
+author: "Michael Bevilacqua, Colin Flaherty, Phil Kaplan"
 date: "2024-02-12"
 output: html_document
 ---
