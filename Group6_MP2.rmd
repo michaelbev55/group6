@@ -34,9 +34,16 @@ o <- dat1$Larm
 r <- dat1$Li
 l <- dat1$Lo
 law_cos <- function(o,r,l) {
-  cos_theta <- (o^2 + r^2 - l^2) / (2 * o * r)
+  cos_theta <- (-o^2 + r^2 + l^2) / (2 * o * r)
   theta <- acos(cos_theta)
   return(theta)
 }
+
+
+law_cos2 <- function(l, r, theta) {
+  Lmuscle <- sqrt(-1 * (cos(theta) * 2 * l * r - l^2 - r^2))
+  return(Lmuscle)
+}
+
 ```
 
