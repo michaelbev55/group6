@@ -29,9 +29,7 @@ dat1 <- tibble(
   Lo = c(0.320, 0.280, 0.320)
 )
 print(dat1)
-```
 
-```{r}
 o <- dat1$Larm
 r <- dat1$Li
 l <- dat1$Lo
