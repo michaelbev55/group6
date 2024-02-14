@@ -54,7 +54,7 @@ dat3 <- dat2 %>%
 rho <- 0.00105
 k <- 80
 Lmuscler <- Lmuscle * 0.8
-model <- funtion(Mass, Lmuscler, Lmuscle, theta, r, rho, k)
+model <- function(Mass, Lmuscler, Lmuscle, theta, r, rho, k)
 
 
 
