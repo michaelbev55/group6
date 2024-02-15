@@ -12,27 +12,22 @@ library(tidyverse)
 
 ```{r functions, message=FALSE, echo=FALSE, warning=FALSE}
 dat1 <- tibble(
-  Measurement = c("Mass", "Larm", "Li", "Lo"),
-  Phil = c(0.418, 0.35, 0.08, 0.32),
-  Colin = c(0.252, 0.31, 0.065, 0.28),
-  Michael = c(0.344, 0.305, 0.08, 0.32)
+ Person= c("Phil", "Colin", "Michael"),
+  Mmuscle = c(0.418, 0.252, 0.344),
+  Lo = c(0.320, 0.280, 0.320),
+  Li = c(0.080, 0.065, 0.080),
+  Larm = c(0.350, 0.31, 0.305)
 )
 print(dat1)
 ```
 
-```{r functions, message=FALSE, echo=FALSE, warning=FALSE}
-dat1 <- tibble(
- Person= c("Phil", "Colin", "Michael"),
-  Mass = c(0.418, 0.252, 0.344),
-  Larm = c(0.350, 0.31, 0.305),
-  Li = c(0.080, 0.065, 0.080),
-  Lo = c(0.320, 0.280, 0.320)
-)
-print(dat1)
+```{r}
+#Writing Needed Functions 
 
 o <- dat1$Larm
 r <- dat1$Li
 l <- dat1$Lo
+
 law_cos <- function(o,r,l) {
   cos_theta <- (-o^2 + r^2 + l^2) / (2 * o * r)
   theta <- acos(cos_theta)
@@ -42,10 +37,12 @@ dat2 <- dat1 %>%
   mutate(theta = law_cos(o,r,l)) %>% 
   print()
 
+law_cos <- function(o, l, r) {
+  acos((-o^2 + l^2 + r^2) / (2 * l * r))
+}
 
 law_cos2 <- function(l, r, theta) {
-  Lmuscle <- sqrt(-1 * (cos(theta) * 2 * l * r - l^2 - r^2))
-  return(Lmuscle)
+  sqrt(l^2 + r^2 - 2 * l * r * cos(theta))
 }
 dat3 <- dat2 %>% 
   mutate(Lmuscle = law_cos2(l,r,theta)) %>% 
@@ -55,6 +52,59 @@ rho <- 0.00105
 k <- 80
 Lmuscler <- Lmuscle * 0.8
 model <- function(Mass, Lmuscler, Lmuscle, theta, r, rho, k)
+
+
+
+#Establishing rho and k 
+rho <- 0.00105
+k <- 80
+
+
+ffl <- function(Lmuscle, Lmuscler) {
+  -6.25 * ((Lmuscle / Lmuscler)^2) + 12.5 * (Lmuscle / Lmusculer) - 5.25
+}
+
+# Function to calculate PCSA and Fmax
+PCSA <- function(Mmuscle, phi, Lmuscler) {
+  Mmuscle * cos(phi) / (rho * Lmuscler)
+}
+
+
+```
+
+
+```{r functions, message=FALSE, echo=FALSE, warning=FALSE}
+
+
+# The main model function
+model <- function(mass, Lmuscler, Lmuscle, theta, Lo, rho = 0.00105, k = 80) {
+  # Convert lengths from m to cm for PCSA calculation
+  Lmuscler_cm <- Lmuscler * 100
+  Lmuscle_cm <- Lmuscle * 100
+  Lo_cm <- Lo * 100
+  
+  # Calculate PCSA and Fmax
+  pcsa <- PCSA(mass, 0, Lmuscler_cm)  # Assuming non-pennate muscle (phi=0)
+  Fmax <- pcsa * k
+  
+  # Calculate force-length factor
+  ffl_value <- ffl(Lmuscle_cm, Lmuscler_cm * 0.8)
+  
+  # Calculate muscle force
+  Fmuscle <- Fmax * ffl_value
+  
+  # Calculate torque
+  torque <- Fmuscle * sin(theta) * Lo_cm
+  
+  return(torque)
+}
+
+# Example application
+# Define your muscle mass, rest length, etc., based on your biometric data
+# Calculate for given flexion angles and apply the model
+
+
+
 
 
 
